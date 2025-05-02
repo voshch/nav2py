@@ -20,7 +20,7 @@
 
 double recv_double(int sockfd)
 {
-    uint64_t retval; //double
+    uint64_t retval; // double
 
     size_t total_bytes = 0;
     do
@@ -38,6 +38,7 @@ double recv_double(int sockfd)
 
 namespace nav2py
 {
+
     class Controller : public nav2_core::Controller
     {
 
@@ -111,13 +112,15 @@ namespace nav2py
             close(socket_);
             socket_ = -1;
         }
-        
+
         const std::string SEP_BYTE = "\x01";
         const std::string END_BYTE = "\x03";
 
-        void nav2py_send(std::string name, std::vector<std::string> messages){
+        void nav2py_send(std::string name, std::vector<std::string> messages)
+        {
             send(socket_, name.c_str(), name.size(), 0);
-            for(const auto& message : messages){
+            for (const auto &message : messages)
+            {
                 send(socket_, SEP_BYTE.c_str(), SEP_BYTE.size(), 0);
                 send(socket_, message.c_str(), message.size(), 0);
             }
@@ -132,6 +135,7 @@ namespace nav2py
             return cmd_vel;
         };
     };
-}
+
+} // namespace nav2py
 
 #endif // NAV2PY__CONTROLLER_HPP_
